@@ -1,7 +1,6 @@
 using System;
 
 namespace ZBCvr{
-	
 	public class Bitchess{
 		
 		public ulong[][] Gamestate;
@@ -9,7 +8,9 @@ namespace ZBCvr{
 		private ulong[][] GamestateShadow;
 		private int GamestateShadowIndex;
 		
-		public Bitchess(string configuration = "classic"){
+		public Bitchess(){}//Bitchess
+		
+		public void Engine(){
 			Gamestate = new ulong[2][]{
 				Bitboard.NewBitboard(configuration),
 				Bitboard.NewBitboard("empty")
@@ -19,10 +20,7 @@ namespace ZBCvr{
 			GamestateShadow = new ulong[4][];
 			GamestateShadowIndex = 0;
 			return;
-		}//Bitgame
-		
-		public static void Main(string[] args){
-		}//Main
+		}//Engine
 		
 		#region gamestate manipulation
 		
@@ -47,7 +45,6 @@ namespace ZBCvr{
 				Gamestate = GamestateShadow;
 				GamestateShadow = new ulong[Gamestate.Length * 2][];
 			}
-			
 			return;
 		}//BitboardAdd
 		
@@ -60,5 +57,11 @@ namespace ZBCvr{
 		
 		#endregion gamestate manipulation
 		
+		#region move logic
+		
+		
+		
+		#endregion move logic
+		
 	}// end class Bitgame
-}// end namespace ZBC
+}// end namespace ZBCvr

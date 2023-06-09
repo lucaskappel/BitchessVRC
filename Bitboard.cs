@@ -303,6 +303,11 @@ namespace ZBCvr {
 			return -1;
 		}//PieceTypeAtCoordinate
 
+		private static ulong ScanForAttacks(ulong[] bitboard, ulong coordinate, int pieceColor){
+			//returns a ulong with the coordinates of the pieces attacking the input coordinate
+			
+		}//ScanForAttacks
+
 		#endregion board utility
 		
 		#region bitmap utility
@@ -341,6 +346,7 @@ namespace ZBCvr {
 		/* Move Generation
 		Piecewise move generation. Each type of move gets its own method.
 		"bitmap" is the coordinate of the piece attempting to be moved.
+		
 		*/
 		
 		public static ulong MoveGenerate(ulong[] bitboard, ulong pieceCoordinate, ulong previoiusPawns = 0x0){
@@ -386,7 +392,7 @@ namespace ZBCvr {
 			// Mask by piece occupancy
 			legal_moves &= ~(bitboard[0] | bitboard[1]);
 			
-			return legal_moves;
+			return new ulong egal_moves;
 		}//MoveGeneratePawn
 		
 		private static ulong MoveGeneratePawnDouble(ulong[] bitboard, ulong pieceCoordinate){ // if it hasn't moved yet, pawn can also go two squares!
@@ -513,8 +519,27 @@ namespace ZBCvr {
 					kingMoves |= pieceCoordinate >> compass_rose[i];
 				}
 			}
+			
 			return MoveGenerateQueen(bitboard, pieceCoordinate) & kingMoves;
 		}//MoveGenerateKing
+		
+		private static ulong MoveGenerateKingCastle(ulong[] bitboard, ulong pieceCoordinate, bool[] castlingRights){
+			ulong kingMoves = 0x0;
+			
+			int pieceColor = 0;
+			if(    (pieceCoordiante & bitboard[0]) != 0x0){ pieceColor = 0; }
+			else if(pieceCoordiante & bitboard[1]) != 0x0){ pieceColor = 1; }
+			
+			// If the king's color still has castling rights, then find the first blockers left and right.
+			if(castlingRights[pieceColor]){
+				//ulong castleBlockers
+			}
+			
+			
+			// We can't calculate if the king and rooks are unmoved as they can move backwards; we have to pass the bool in from outside...
+			
+			return 0x0;
+		}//MoveGenerateKingCastle
 			
 		/* Sliding Attack
 		algorithm to calculate sliding attacks. generates a ray in a direction, then makes sure it stops at the first blocker,
